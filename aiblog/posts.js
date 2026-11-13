@@ -18,6 +18,16 @@
 
 const POSTS = [
   {
+    title: "Panda's Fast-Food Feast on the Tennis Court",
+    date: "2026-09-17",
+    credit: "Made by L.N.",
+    model: "Firefly",
+    prompt: "make me a fat panda eating fast food on a tennis court in a cartoon style",
+    quote: "When Adobe Firefly says \"commercially safe\" it implies that the generated image is safe for using without a risk of copyright. The image generated doesn't rely on training inputs or create outputs based on other artists.",
+    image: "blog_2026-09-17_ln_firefly.jpg",
+    tags: ["Image Generation"]
+  },
+  {
     title: "Mountain Ravine on a Cloudy Day",
     date: "2026-09-16",
     credit: "Made by K.N.",
