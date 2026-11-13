@@ -18,6 +18,16 @@
 
 const POSTS = [
   {
+    title: "Gold-Chain Shark Steps Up to Bat",
+    date: "2026-09-22",
+    credit: "Made by D.T.",
+    model: "Firefly",
+    prompt: "a muscular shark with a gold chain batting at a baseball game on a hot sunny day. the style is cartoon art",
+    quote: "I think what Adobe Firefly means when they say that their models are commercially safe is that the AI model is built to be used in business and advertising without risking copyright infringement lawsuits or intellectual property violations with other communities of people.",
+    image: "blog_2026-09-22_dt_firefly.jpg",
+    tags: ["Image Generation"]
+  },
+  {
     title: "Polar Bear's Noodle Break on a Surfboard",
     date: "2026-09-21",
     credit: "Made by T.P.",
