@@ -18,6 +18,16 @@
 
 const POSTS = [
   {
+    title: "Polar Bear's Noodle Break on a Surfboard",
+    date: "2026-09-21",
+    credit: "Made by T.P.",
+    model: "Firefly",
+    prompt: "A small polar bear with a daisy flower hair clip. He is sitting on a surfboard eating instant noodles on a beach with lots of coral reefs and small colorful fishes swimming underneath on a sunny day during summer. The image in a style of cartoon drawings",
+    quote: "It means because its AI are mainly trained on licensed content, not taking random content from the internet. So others can use the generative content without worrying about copyright",
+    image: "blog_2026-09-21_tp_firefly.jpg",
+    tags: ["Image Generation"]
+  },
+  {
     title: "Snow Leopard Above the Clouds",
     date: "2026-09-18",
     credit: "Made by T.N.",
