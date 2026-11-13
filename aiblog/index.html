@@ -1,206 +1,262 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>The Official, Artificial Blog</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+  <title>The Official, Artificial Blog</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS v5.2.1 -->
-    <link 
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" 
-      rel="stylesheet"
-      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" 
-      crossorigin="anonymous"
-    >
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Coustard">
+  <link rel="icon" href="../images2/blog_favicon.png?v=1">
 
-    <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Coustard">
+  <style>
+    :root {
+      --blue: #0635aa;
+      --blue-dark: #042a88;
+      --yellow: #fec707;
+    }
 
-    <!-- Favicon -->
-    <link rel="icon" href="../images2/favicon.png?v=1">
+    body {
+      font-family: "Coustard", serif;
+      background-color: var(--blue);
+      margin: 0;
+    }
 
-    <!-- Bootstrap Icons -->
-    <link 
-      rel="stylesheet" 
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
-    >
+    /* Top menu back to the main site */
+    .site-nav {
+      background: var(--blue-dark);
+      padding: 0.6rem 1rem;
+      display: flex;
+      gap: 1.25rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .site-nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .site-nav a:hover { color: var(--yellow); }
 
-    <style>
-      body {
-        font-family: "Coustard", sans-serif;
-        background-color: #0635aa;
-        margin: 0;
-        padding: 0;
-      }
+    /* Banner */
+    .blog-banner {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+    }
+    .blog-banner .mascot {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 5px solid var(--yellow);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    }
+    .blog-banner h1 {
+      color: var(--yellow);
+      font-size: 2.4rem;
+      margin: 1rem 0 0.25rem;
+    }
+    .blog-banner a.home-link { color: inherit; text-decoration: none; }
+    .blog-banner p {
+      color: var(--yellow);
+      font-size: 1.1rem;
+      margin: 0;
+    }
 
-      /* Banner styling */
-      .blog-banner {
-        background-color: #0635aa;
-        padding: 2rem 1rem;
-        text-align: center;
-      }
+    /* Active tag filter bar */
+    .filter-bar {
+      max-width: 800px;
+      margin: 1rem auto 0;
+      color: #fff;
+      text-align: center;
+    }
+    .filter-bar button {
+      margin-left: 0.5rem;
+      background: var(--yellow);
+      color: var(--blue);
+      border: none;
+      border-radius: 999px;
+      padding: 0.15rem 0.8rem;
+      font-family: inherit;
+      cursor: pointer;
+    }
 
-      .blog-banner h1 {
-        margin: 0;
-        font-size: 2.5rem;
-        color: #fec707;
-      }
+    /* Post cards */
+    .posts {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .post-card {
+      background: #fff;
+      border-radius: 12px;
+      margin: 1.25rem 0;
+      padding: 1.5rem;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    }
+    .post-card h3 {
+      color: var(--blue);
+      margin-bottom: 0.25rem;
+    }
+    .post-meta {
+      color: #5a6478;
+      font-size: 0.9rem;
+      margin-bottom: 0.9rem;
+    }
+    .post-card p.text { color: #222; }
+    .post-card img.post-img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #d5dbe8;
+      margin-top: 0.5rem;
+    }
+    .post-links {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .post-links a {
+      background: var(--blue);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.45rem 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+    .post-links a:hover { background: var(--blue-dark); }
 
-      .blog-banner p {
-        margin: 0;
-        font-size: 1.2rem;
-        color: #fec707;
-      }
+    .tags { margin-top: 1rem; }
+    .tag {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--blue);
+      border-radius: 999px;
+      padding: 0.15rem 0.75rem;
+      margin: 0.2rem 0.3rem 0.2rem 0;
+      font-size: 0.85rem;
+      text-decoration: none;
+    }
+    .tag:hover { filter: brightness(0.93); }
 
-      /* Post card styling */
-      .post-card {
-        margin: 1rem auto;
-        max-width: 800px;
-      }
+    .empty {
+      color: #fff;
+      text-align: center;
+      margin: 2rem 0;
+    }
 
-      /* Adjust colors for post titles and metadata */
-      .post-card .card-title {
-        color: #0635aa; /* Matches background color (blue) */
-      }
+    footer {
+      text-align: center;
+      color: #fff;
+      padding: 2rem 0;
+    }
+    .footer-image {
+      width: 158px;
+      max-width: 80%;
+      border-radius: 8px;
+    }
 
-      .post-meta {
-        font-size: 0.9rem;
-        color: #fec707; /* Matches title/banner text color (yellow) */
-        margin-bottom: 0.5rem;
-      }
+    @media (max-width: 576px) {
+      .blog-banner h1 { font-size: 1.8rem; }
+      .blog-banner .mascot { width: 120px; height: 120px; }
+      .post-card { padding: 1.1rem; }
+    }
+  </style>
+</head>
 
-      /* BORDER FOR ALL POST IMAGES */
-      .post-card img {
-        border: 1px solid #0635aa; /* Thin border in background blue */
-      }
+<body>
+  <nav class="site-nav">
+    <a href="/">Home</a>
+    <a href="/introAI">Intro to AI</a>
+    <a href="/apCSP">AP CSP</a>
+    <a href="/apCSA">AP CSA</a>
+    <a href="/contact">Contact</a>
+  </nav>
 
-      /* Tags styling */
-      .post-tags {
-        font-size: 0.9rem;
-        margin-top: 0.5rem;
-      }
-      .post-tags a {
-        color: #fec707;
-        text-decoration: none;
-      }
-      .post-tags a:hover {
-        text-decoration: underline;
-      }
-
-      .footer-image {
-        width: 158px;
-        height: auto;
-        border-radius: 8px;
-        max-width: 80%;
-      }
-
-      footer {
-        color: #214D75;
-      }
-    </style>
-  </head>
-
-  <body>
-    <!-- Title Banner -->
-    <header class="blog-banner">
+  <header class="blog-banner">
+    <a href="/aiblog/" class="home-link">
+      <img src="../images2/blog_dragon.png?v=1" alt="Blog mascot: a baby dragon" class="mascot">
       <h1>The Official, Artificial Blog</h1>
-      <p>Studying AI in the STEAM Design Center at SSIS</p>
-    </header>
+    </a>
+    <p>Studying AI in the STEAM Design Center at SSIS</p>
+  </header>
 
-    <main class="container mt-3">
-      <!-- New Blog Entry Positioned at the Top -->
-      <div class="post-card card">
-        <div class="card-body">
-          <h3 class="card-title">Full STEAM - Teachable Machine</h3>
-          <p class="post-meta">February 22, 2025 by Mr. F</p>
-          <p class="card-text">
-            Please click the link below.
-          </p>
-          <br><br><br>
-          <div class="text-center">
-            <a href="https://teachablemachine.withgoogle.com/train/image/1nwvYY7rsFjJfLWMZmrPxIJGi3ErfvVw4" target="_blank">
-              Teachable Machine Demo
-            </a>
-            <br>
-            <a href="https://teachablemachine.withgoogle.com/train/image" target="_blank">
-              Teachable Machine - Start Your Own
-            </a>
-          </div>
-          <br><br><br>
-        </div>
-      </div>
+  <div class="filter-bar" id="filter-bar" hidden></div>
 
-      <!-- Newest Post -->
-      <div class="post-card card">
-        <div class="card-body">
-          <h3 class="card-title">U11 Boys Basketball Tryout Flyer</h3>
-          <p class="post-meta">January 22, 2025 by Mr. F</p>
-          <p class="card-text">
-            For the upcoming season of U11 Boys Basketball at SSIS, I decided to cook up a flyer using some of 
-            the AI tools that we have learned about for image generation and editing. This flyer was made with 
-            DALL-E 3 and Canva.
-          </p>
-          <img 
-            src="../images2/U11_Tryouts.png" 
-            alt="U11 Boys Basketball Tryout Flyer" 
-            class="img-fluid rounded"
-          >
-          <!-- Tags Section -->
-          <p class="post-tags">
-            <strong>Tags:</strong>
-            <a href="https://mrfarouq.com/aiblog/dalle3" target="_blank">DALL-E 3</a>, 
-            <a href="https://mrfarouq.com/aiblog/generativeai" target="_blank">Generative AI</a>
-          </p>
-        </div>
-      </div>
+  <main class="posts" id="posts"></main>
 
-      <!-- Second Post -->
-      <div class="post-card card">
-        <div class="card-body">
-          <h3 class="card-title">Second Post</h3>
-          <p class="post-meta">January 22, 2025 by Mr. F</p>
-          <p class="card-text">
-            This is the second blog post. Below is an image illustrating
-            a special moment during a ceremony.
-          </p>
-          <img 
-            src="../images2/ceremony.png" 
-            alt="Ceremony Image" 
-            class="img-fluid rounded"
-          >
-        </div>
-      </div>
+  <footer>
+    <img src="../images2/white_ssis.png" alt="SSIS Logo" class="footer-image">
+    <br>
+    &copy; <span id="year"></span> J. Farouq
+  </footer>
 
-      <!-- Oldest Post -->
-      <div class="post-card card">
-        <div class="card-body">
-          <h3 class="card-title">Testing</h3>
-          <p class="post-meta">January 21, 2025 by Mr. F</p>
-          <p class="card-text">
-            This is the first blog post. You can replace this text
-            with your own content, and create additional posts above.
-          </p>
-        </div>
-      </div>
-    </main>
+  <script src="posts.js?v=1"></script>
+  <script>
+    const MONTHS = ["January", "February", "March", "April", "May", "June", "July",
+      "August", "September", "October", "November", "December"];
 
-    <footer class="container text-center mt-4 mb-4">
-      <img src="../images2/white_ssis.png" alt="SSIS Logo" class="footer-image">
-      <br>
-      &copy; 2024 J. Farouq
-    </footer>
+    function formatDate(iso) {
+      const [y, m, d] = iso.split("-").map(Number);
+      return `${MONTHS[m - 1]} ${d}, ${y}`;
+    }
 
-    <!-- Bootstrap JavaScript Libraries -->
-    <script 
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" 
-      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-      crossorigin="anonymous">
-    </script>
-    <script 
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" 
-      integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
-      crossorigin="anonymous">
-    </script>
-  </body>
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c =>
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    }
+
+    function tagLink(tag) {
+      return `<a class="tag" href="#tag=${encodeURIComponent(tag)}">${escapeHtml(tag)}</a>`;
+    }
+
+    function renderPost(p) {
+      const image = p.image
+        ? `<img class="post-img" src="../images2/${encodeURI(p.image)}" alt="${escapeHtml(p.title)}" loading="lazy">`
+        : "";
+      const links = (p.links || []).length
+        ? `<div class="post-links">${p.links.map(l =>
+            `<a href="${escapeHtml(l.url)}" target="_blank" rel="noopener">${escapeHtml(l.label)}</a>`).join("")}</div>`
+        : "";
+      const tags = (p.tags || []).length
+        ? `<div class="tags">${p.tags.map(tagLink).join("")}</div>`
+        : "";
+      return `
+        <article class="post-card">
+          <h3>${escapeHtml(p.title)}</h3>
+          <div class="post-meta">${formatDate(p.date)} &middot; ${escapeHtml(p.credit || "Mr. F")}</div>
+          ${p.text ? `<p class="text">${escapeHtml(p.text)}</p>` : ""}
+          ${image}
+          ${links}
+          ${tags}
+        </article>`;
+    }
+
+    function render() {
+      const match = location.hash.match(/^#tag=(.+)$/);
+      const tag = match ? decodeURIComponent(match[1]) : null;
+      const list = [...POSTS]
+        .sort((a, b) => b.date.localeCompare(a.date))
+        .filter(p => !tag || (p.tags || []).includes(tag));
+
+      const bar = document.getElementById("filter-bar");
+      if (tag) {
+        bar.hidden = false;
+        bar.innerHTML = `Showing posts tagged <strong>${escapeHtml(tag)}</strong>
+          <button onclick="location.hash=''">Show all</button>`;
+      } else {
+        bar.hidden = true;
+      }
+
+      document.getElementById("posts").innerHTML = list.length
+        ? list.map(renderPost).join("")
+        : `<p class="empty">No posts with that tag yet.</p>`;
+      window.scrollTo(0, 0);
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    window.addEventListener("hashchange", render);
+    render();
+  </script>
+</body>
 </html>
