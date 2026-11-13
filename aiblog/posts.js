@@ -18,6 +18,16 @@
 
 const POSTS = [
   {
+    title: "Coastal Highway Cruise in a Teal Convertible",
+    date: "2026-09-23",
+    credit: "Made by P.T.",
+    model: "Firefly",
+    prompt: "Generate an image of a doll with brown hair and a pink dress driving a teal convertible down the coastal highway. Make the image in a realistic style.",
+    quote: "Commercially safe models refer to AI systems that are safe for businesses to use without risking copyright infringement. I believe these models are trained with inputs that aren't copyright protected, making the outputs credit-free.",
+    image: "blog_2026-09-23_pt_firefly.jpg",
+    tags: ["Image Generation"]
+  },
+  {
     title: "Gold-Chain Shark Steps Up to Bat",
     date: "2026-09-22",
     credit: "Made by D.T.",
