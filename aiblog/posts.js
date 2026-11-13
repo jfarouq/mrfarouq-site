@@ -8,11 +8,24 @@
 //  credit – who made it, e.g. "Made by H.M." or "Mr. F"
 //  text   – a sentence or two (optional)
 //  image  – file name inside the images2 folder (optional)
+//  model  – AI model used, e.g. "Firefly" (clickable badge)
+//  prompt – the exact prompt the student used
+//  quote  – the student's own reflection (optional)
 //  links  – buttons under the post (optional)
 //  tags   – topics; clicking a tag shows only those posts
 // ============================================================
 
 const POSTS = [
+  {
+    title: "Comic-Style Student in New York City",
+    date: "2026-09-15",
+    credit: "Made by H.C.",
+    model: "Firefly",
+    prompt: "give me a comic style (uses bold lines, flat or halftone shading, and dynamic compositions to tell visual stories) drawing of a student walking around Newyork city. make the colors less colorful, mutual colors. make it less realistic looking drawing style.",
+    quote: "When Adobe Firefly says \"commercially safe\" it means that I can use the picture without worrying about copyrights.",
+    image: "blog_2026-09-15_hc_firefly.jpg",
+    tags: ["Image Generation"]
+  },
   {
     title: "Full STEAM: Teachable Machine",
     date: "2025-02-22",

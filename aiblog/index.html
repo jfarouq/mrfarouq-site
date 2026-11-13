@@ -139,6 +139,42 @@
     }
     .tag:hover { filter: brightness(0.93); }
 
+    .model-tag {
+      display: inline-block;
+      background: var(--blue);
+      color: #fff;
+      border-radius: 999px;
+      padding: 0.15rem 0.75rem;
+      font-size: 0.85rem;
+      text-decoration: none;
+      margin-left: 0.4rem;
+    }
+    .model-tag:hover { background: var(--blue-dark); color: var(--yellow); }
+    .prompt-box {
+      background: #0f1b3d;
+      color: #c8f7c5;
+      font-family: "Courier New", monospace;
+      font-size: 0.9rem;
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+      margin: 0.75rem 0;
+      white-space: pre-wrap;
+    }
+    .prompt-box .label {
+      display: block;
+      color: var(--yellow);
+      font-family: "Coustard", serif;
+      font-size: 0.8rem;
+      margin-bottom: 0.35rem;
+      letter-spacing: 0.04em;
+    }
+    .quote {
+      border-left: 4px solid var(--yellow);
+      padding: 0.25rem 0 0.25rem 0.9rem;
+      margin: 0.75rem 0;
+      color: #333;
+      font-style: italic;
+    }
     .empty {
       color: #fff;
       text-align: center;
@@ -191,7 +227,7 @@
     &copy; <span id="year"></span> J. Farouq
   </footer>
 
-  <script src="posts.js?v=1"></script>
+  <script src="posts.js?v=2"></script>
   <script>
     const MONTHS = ["January", "February", "March", "April", "May", "June", "July",
       "August", "September", "October", "November", "December"];
@@ -224,8 +260,10 @@
       return `
         <article class="post-card">
           <h3>${escapeHtml(p.title)}</h3>
-          <div class="post-meta">${formatDate(p.date)} &middot; ${escapeHtml(p.credit || "Mr. F")}</div>
+          <div class="post-meta">${formatDate(p.date)} &middot; ${escapeHtml(p.credit || "Mr. F")}${p.model ? `<a class="model-tag" href="#tag=${encodeURIComponent(p.model)}">Model: ${escapeHtml(p.model)}</a>` : ""}</div>
           ${p.text ? `<p class="text">${escapeHtml(p.text)}</p>` : ""}
+          ${p.prompt ? `<div class="prompt-box"><span class="label">PROMPT</span>${escapeHtml(p.prompt)}</div>` : ""}
+          ${p.quote ? `<blockquote class="quote">&ldquo;${escapeHtml(p.quote)}&rdquo;</blockquote>` : ""}
           ${image}
           ${links}
           ${tags}
@@ -237,7 +275,7 @@
       const tag = match ? decodeURIComponent(match[1]) : null;
       const list = [...POSTS]
         .sort((a, b) => b.date.localeCompare(a.date))
-        .filter(p => !tag || (p.tags || []).includes(tag));
+        .filter(p => !tag || (p.tags || []).includes(tag) || p.model === tag);
 
       const bar = document.getElementById("filter-bar");
       if (tag) {
