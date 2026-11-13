@@ -18,6 +18,16 @@
 
 const POSTS = [
   {
+    title: "Post-Impressionist Desert Horizon",
+    date: "2026-09-25",
+    credit: "Made by J.A.",
+    model: "Firefly",
+    prompt: "create a painting of a man standing in a dessert, arms out towards the horizon, Generate an image in a Post-Impressionist style with thick impasto paint, kinetic swirling brushstrokes, and intense complementary colors like vibrant yellows and deep blues.",
+    quote: "Commercially safe means that the images can be used without a copyright, meaning they are safe for companies to use to advertise",
+    image: "blog_2026-09-25_ja_firefly.jpg",
+    tags: ["Image Generation"]
+  },
+  {
     title: "The Snail-Shell Staircase",
     date: "2026-09-24",
     credit: "Made by L.Z.",
