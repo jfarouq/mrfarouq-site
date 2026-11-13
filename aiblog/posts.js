@@ -18,6 +18,16 @@
 
 const POSTS = [
   {
+    title: "Snow Leopard Above the Clouds",
+    date: "2026-09-18",
+    credit: "Made by T.N.",
+    model: "Firefly",
+    prompt: "A majestic snow leopard resting on a rocky mountain peak, surrounded by misty clouds, cinematic nature photography style with soft morning light and realistic details.",
+    quote: "They designed Firefly so that businesses can use the generated content with a lower risk of accidentally infringing someone else’s copyright or intellectual property.",
+    image: "blog_2026-09-18_tn_firefly.jpg",
+    tags: ["Image Generation"]
+  },
+  {
     title: "Panda's Fast-Food Feast on the Tennis Court",
     date: "2026-09-17",
     credit: "Made by L.N.",
