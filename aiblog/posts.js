@@ -18,6 +18,16 @@
 
 const POSTS = [
   {
+    title: "The Snail-Shell Staircase",
+    date: "2026-09-24",
+    credit: "Made by L.Z.",
+    model: "Firefly",
+    prompt: "Close-up macro of a snail whose shell is a spiral staircase, with a very small businessman climbing it, briefcase in hand. Shallow depth of field, morning dew, National Geographic lighting.",
+    quote: "I think being commercially safe for image generation means there is no copyright image scraping, clean training data, and legal protection.",
+    image: "blog_2026-09-24_lz_firefly.jpg",
+    tags: ["Image Generation"]
+  },
+  {
     title: "Coastal Highway Cruise in a Teal Convertible",
     date: "2026-09-23",
     credit: "Made by P.T.",
