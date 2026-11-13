@@ -42,12 +42,7 @@ const POSTS = [
     date: "2026-09-16",
     credit: "Made by K.N.",
     model: "Firefly",
-    promptParts: [
-      { label: "Subject", value: "Mountain range with a ravine" },
-      { label: "Setting", value: "Day time, cloudy" },
-      { label: "Style", value: "Realistic photo" }
-    ],
-    prompt: "Create me an image in the style of a realistic photo of a mountain clif with a ravine",
+    prompt: "Subject: Mountain range with a ravine\nSetting: Day time, cloudy\nStyle: Realistic photo\nPrompt: Create me an image in the style of a realistic photo of a mountain clif with a ravine",
     quote: "Adobe Firefly refers to commercially safe as using pictures without the worry of copyrights.",
     image: "blog_2026-09-16_kn_firefly.jpg",
     tags: ["Image Generation"]
