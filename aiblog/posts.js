@@ -8,7 +8,7 @@
 //  credit – who made it, e.g. "Made by H.M." or "Mr. F"
 //  text   – a sentence or two (optional)
 //  image  – file name inside the images2 folder (optional)
-//  model  – AI model used, e.g. "Firefly" (clickable badge)
+//  model  – AI model used, e.g. "Firefly" (shown as a tag at the bottom)
 //  promptParts – optional labelled lines, e.g. Subject / Setting / Style
 //  prompt – the exact prompt the student used
 //  quote  – the student's own reflection (optional)
@@ -124,6 +124,6 @@ const POSTS = [
     credit: "Mr. F",
     text: "For the upcoming U11 Boys Basketball season, I made a tryout flyer using the image generation and editing tools we have been learning about. Made with DALL-E 3 and Canva.",
     image: "U11_Tryouts.png",
-    tags: ["DALL-E 3", "Generative AI"]
+    tags: ["Image Generation", "DALL-E"]
   }
 ];

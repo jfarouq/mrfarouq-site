@@ -267,13 +267,14 @@
         ? `<div class="post-links">${p.links.map(l =>
             `<a href="${escapeHtml(l.url)}" target="_blank" rel="noopener">${escapeHtml(l.label)}</a>`).join("")}</div>`
         : "";
-      const tags = (p.tags || []).length
-        ? `<div class="tags">${p.tags.map(tagLink).join("")}</div>`
+      const allTags = [...new Set([...(p.tags || []), ...(p.model ? [p.model] : [])])];
+      const tags = allTags.length
+        ? `<div class="tags">${allTags.map(tagLink).join("")}</div>`
         : "";
       return `
         <article class="post-card">
           <h3>${escapeHtml(p.title)}</h3>
-          <div class="post-meta">${formatDate(p.date)} &middot; ${escapeHtml(p.credit || "Mr. F")}${p.model ? `<a class="model-tag" href="#tag=${encodeURIComponent(p.model)}">Model: ${escapeHtml(p.model)}</a>` : ""}</div>
+          <div class="post-meta">${formatDate(p.date)} &middot; ${escapeHtml(p.credit || "Mr. F")}</div>
           ${p.text ? `<p class="text">${escapeHtml(p.text)}</p>` : ""}
           ${(p.prompt || p.promptParts) ? `<div class="prompt-box">${p.promptParts ? `<dl class="prompt-grid">${p.promptParts.map(x => `<dt>${escapeHtml(x.label)}</dt><dd>${escapeHtml(x.value)}</dd>`).join("")}</dl>` : ""}${p.prompt ? `<span class="label">PROMPT</span><span class="ptext">${escapeHtml(p.prompt)}</span>` : ""}</div>` : ""}
           ${p.quote ? `<blockquote class="quote">&ldquo;${escapeHtml(p.quote)}&rdquo;</blockquote>` : ""}
