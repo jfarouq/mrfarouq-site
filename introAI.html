@@ -21,6 +21,13 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
   <style>
+    .hover-pop img {
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+    .hover-pop:hover img {
+      transform: scale(1.04);
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35));
+    }
     .agenda-link img {
       display: block;
       margin: 0 auto;
@@ -139,7 +146,7 @@
       <!-- Blog Link Section -->
     <div class="container mt-4 text-center">
         <p class="text-light mb-1">*To learn more about this course, check out our classroom blog by clicking the baby dragon below:</p>
-        <a href="/aiblog">
+        <a href="/aiblog" class="hover-pop d-inline-block">
         <img src="images2/babydragon.png" alt="Baby Dragon" class="img-fluid rounded mx-auto d-block mb-5" style="max-width: 250px;">
         </a>
     </div>
