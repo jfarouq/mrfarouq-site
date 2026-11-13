@@ -158,7 +158,7 @@
       border-radius: 8px;
       padding: 0.9rem 1rem;
       margin: 0.75rem 0;
-      white-space: pre-wrap;
+      white-space: normal;
     }
     .prompt-box .label {
       display: block;
@@ -168,6 +168,19 @@
       margin-bottom: 0.35rem;
       letter-spacing: 0.04em;
     }
+    .prompt-grid {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 0.3rem 0.9rem;
+      margin-bottom: 0.6rem;
+    }
+    .prompt-grid dt {
+      color: var(--yellow);
+      font-family: "Coustard", serif;
+      font-weight: normal;
+      font-size: 0.85rem;
+    }
+    .prompt-grid dd { margin: 0; }
     .quote {
       border-left: 4px solid var(--yellow);
       padding: 0.25rem 0 0.25rem 0.9rem;
@@ -227,7 +240,7 @@
     &copy; <span id="year"></span> J. Farouq
   </footer>
 
-  <script src="posts.js?v=2"></script>
+  <script src="posts.js?v=3"></script>
   <script>
     const MONTHS = ["January", "February", "March", "April", "May", "June", "July",
       "August", "September", "October", "November", "December"];
@@ -262,7 +275,7 @@
           <h3>${escapeHtml(p.title)}</h3>
           <div class="post-meta">${formatDate(p.date)} &middot; ${escapeHtml(p.credit || "Mr. F")}${p.model ? `<a class="model-tag" href="#tag=${encodeURIComponent(p.model)}">Model: ${escapeHtml(p.model)}</a>` : ""}</div>
           ${p.text ? `<p class="text">${escapeHtml(p.text)}</p>` : ""}
-          ${p.prompt ? `<div class="prompt-box"><span class="label">PROMPT</span>${escapeHtml(p.prompt)}</div>` : ""}
+          ${(p.prompt || p.promptParts) ? `<div class="prompt-box">${p.promptParts ? `<dl class="prompt-grid">${p.promptParts.map(x => `<dt>${escapeHtml(x.label)}</dt><dd>${escapeHtml(x.value)}</dd>`).join("")}</dl>` : ""}${p.prompt ? `<span class="label">PROMPT</span>${escapeHtml(p.prompt)}` : ""}</div>` : ""}
           ${p.quote ? `<blockquote class="quote">&ldquo;${escapeHtml(p.quote)}&rdquo;</blockquote>` : ""}
           ${image}
           ${links}
