@@ -21,6 +21,13 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
   <style>
+    .agenda-link img {
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+    .agenda-link:hover img {
+      transform: scale(1.04);
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35));
+    }
     body {
       font-family: "Coustard", sans-serif;
       background-color: #4CAF50;
@@ -106,8 +113,10 @@
     <div class="container mt-4">
       <h1 class="text-light mt-3 text-center">AP® Computer Science A</h1>
       <!-- Central Image -->
-      <img src="images2/anime_classroom.jpeg" alt="CSA Classroom"
-        class="img-fluid responsive-image rounded mx-auto mt-2 d-block">
+      <a href="https://docs.google.com/document/d/e/2PACX-1vSKqB0Y156N5EXJWhkpIQKE_Zskw98EJMyjYak2Z8zxQ96URzCGQcxw3cd6gWmhhavYsp-LtBfu11QB/pub" target="_blank" rel="noopener" class="agenda-link d-block">
+        <img src="images2/daily_agenda.png" alt="Open the AP CSA daily agenda"
+          class="img-fluid responsive-image mx-auto mt-2 d-block">
+      </a>
 
       <!-- Course Description -->
       <p class="text-light mt-3">
