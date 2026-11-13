@@ -241,7 +241,6 @@
     &copy; <span id="year"></span> J. Farouq
   </footer>
 
-  <script src="posts.js?v=4"></script>
   <script>
     const MONTHS = ["January", "February", "March", "April", "May", "June", "July",
       "August", "September", "October", "November", "December"];
@@ -307,8 +306,15 @@
     }
 
     document.getElementById("year").textContent = new Date().getFullYear();
-    window.addEventListener("hashchange", render);
-    render();
+
+    // Load the posts file fresh on every visit, so new posts show up immediately
+    const loader = document.createElement("script");
+    loader.src = "posts.js?t=" + Date.now();
+    loader.onload = () => {
+      window.addEventListener("hashchange", render);
+      render();
+    };
+    document.body.appendChild(loader);
   </script>
 </body>
 </html>
