@@ -26,6 +26,18 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
   <style>
+    /* Centre the menu links on the page; the face icon stays at the left */
+    @media (min-width: 576px) {
+      .navbar { position: relative; }
+      .navbar .navbar-nav {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0 !important;
+        white-space: nowrap;
+      }
+    }
     .hover-pop img {
       transition: transform 0.2s ease, filter 0.2s ease;
     }
