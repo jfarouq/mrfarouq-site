@@ -26,6 +26,13 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
   <style>
+    .hover-pop img {
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+    .hover-pop:hover img {
+      transform: scale(1.04);
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35));
+    }
     body {
       font-family: "Coustard", sans-serif;
       background-color: #4CAF50;
@@ -88,7 +95,9 @@
     <div class="container text-center mt-4">
       <h1 class="text-light mt-3">Contact</h1>
       <!-- Central Image -->
-      <img src="images2/contact_keyboard.gif" alt="Hands typing on a vintage keyboard" class="img-fluid rounded mt-2" style="max-width: min(320px, 100%);">
+      <a href="mailto:jfarouq@ssis.edu.vn" class="hover-pop d-inline-block" aria-label="Email Mr. Farouq">
+        <img src="images2/contact_keyboard.gif" alt="Hands typing on a vintage keyboard" class="img-fluid rounded mt-2" style="max-width: min(320px, 100%);">
+      </a>
 
       <!-- Contact Information -->
       <p class="text-light mt-3">
