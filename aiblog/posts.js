@@ -136,6 +136,6 @@ const POSTS = [
     credit: "Mr. F",
     text: "For the upcoming U11 Boys Basketball season, I made a tryout flyer using the image generation and editing tools we have been learning about. Made with DALL-E 3 and Canva.",
     image: "U11_Tryouts.png",
-    tags: ["Image Generation", "ChatGPT", "DALL-E", "Canva"]
+    tags: ["Image Generation", "ChatGPT", "DALL-E 3", "Canva"]
   }
 ];
