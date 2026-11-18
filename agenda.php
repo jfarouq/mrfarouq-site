@@ -52,7 +52,7 @@ if (!isset($COURSES[$key])) {
 [$title, $heading, $source] = $COURSES[$key];
 
 /* ---------- fetch (with a short cache) ---------- */
-$cacheFile = sys_get_temp_dir() . '/mrfarouq_agenda_v7_' . $key . '.html';
+$cacheFile = sys_get_temp_dir() . '/mrfarouq_agenda_v8_' . $key . '.html';
 $html = null;
 if (is_file($cacheFile) && time() - filemtime($cacheFile) < $CACHE_SECONDS) {
     $html = file_get_contents($cacheFile);
@@ -246,6 +246,10 @@ function clean_html(string $html, array $domains, string $title, array $codes = 
         $font->setAttribute('rel', 'stylesheet');
         $font->setAttribute('href', 'https://fonts.googleapis.com/css?family=Coustard');
         $head->appendChild($font);
+        // drop Google's own tab icon so ours is used
+        foreach (iterator_to_array($xp->query('//link[contains(translate(@rel,"ICON","icon"),"icon")]')) as $old) {
+            $old->parentNode->removeChild($old);
+        }
         foreach ([32, 48, 64, 96, 192] as $n) {
             $l = $doc->createElement('link');
             $l->setAttribute('rel', 'icon');
@@ -273,6 +277,15 @@ html, body {
   max-width: none !important;
   width: auto !important;
 }
+/* Google wraps the doc in a narrow, padded page; let it fill the white panel instead */
+.mf-frame .doc-content, .mf-frame #contents, .mf-frame > div {
+  max-width: none !important;
+  width: auto !important;
+  padding: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.mf-frame { overflow-x: auto; }
 .mf-top {
   position: relative;
   padding: 16px 16px 8px;
@@ -303,7 +316,7 @@ h1.mf-title {
   background: #fff;
   max-width: 900px;
   margin: 20px auto 0;
-  padding: 48px 64px;
+  padding: 40px 40px;
   border-radius: 12px 12px 0 0;
   box-sizing: border-box;
   min-height: calc(100vh - 124px);
