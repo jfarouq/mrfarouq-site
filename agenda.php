@@ -24,6 +24,21 @@ $CACHE_SECONDS  = 120;
 
 header('X-Robots-Tag: noindex, nofollow');
 
+/* ---------- image pass-through: /agenda.php?img=<google image address> ---------- */
+if (isset($_GET['img'])) {
+    $u = $_GET['img'];
+    $h = strtolower(parse_url($u, PHP_URL_HOST) ?? '');
+    if (!preg_match('/(^|\.)(googleusercontent\.com|docs\.google\.com)$/', $h) || !preg_match('#^https://#i', $u)) {
+        http_response_code(400); exit;
+    }
+    [$body, $type] = fetch_raw($u);
+    if ($body === null || !preg_match('#^image/#i', $type)) { http_response_code(404); exit; }
+    header('Content-Type: ' . $type);
+    header('Cache-Control: public, max-age=86400');
+    echo $body;
+    exit;
+}
+
 $key = strtolower(preg_replace('/[^a-z]/i', '', $_GET['c'] ?? ''));
 if (!isset($COURSES[$key])) {
     http_response_code(404);
@@ -32,7 +47,7 @@ if (!isset($COURSES[$key])) {
 [$title, $source] = $COURSES[$key];
 
 /* ---------- fetch (with a short cache) ---------- */
-$cacheFile = sys_get_temp_dir() . '/mrfarouq_agenda_v2_' . $key . '.html';
+$cacheFile = sys_get_temp_dir() . '/mrfarouq_agenda_v3_' . $key . '.html';
 $html = null;
 if (is_file($cacheFile) && time() - filemtime($cacheFile) < $CACHE_SECONDS) {
     $html = file_get_contents($cacheFile);
@@ -74,6 +89,21 @@ function fetch_url(string $url): ?string {
     $ctx  = stream_context_create(['http' => ['timeout' => 15, 'header' => "User-Agent: Mozilla/5.0\r\n"]]);
     $body = @file_get_contents($url, false, $ctx);
     return $body === false ? null : $body;
+}
+
+function fetch_raw(string $url): array {
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_TIMEOUT        => 15,
+        CURLOPT_USERAGENT      => 'Mozilla/5.0 (mrfarouq.com agenda viewer)',
+    ]);
+    $body = curl_exec($ch);
+    $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $type = (string) curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
+    curl_close($ch);
+    return ($body !== false && $code === 200) ? [$body, $type] : [null, ''];
 }
 
 /** Real destination of a link (Google wraps links as google.com/url?q=...). */
@@ -128,17 +158,14 @@ function clean_html(string $html, array $domains, string $title): string {
         foreach (iterator_to_array($xp->query($q)) as $n) $n->parentNode->removeChild($n);
     }
 
-    // 4. Images: make relative addresses absolute and load them straight from Google.
+    // 4. Images: route through this page so Google serves them (avoids hotlink blocking).
     foreach (iterator_to_array($xp->query('//img')) as $img) {
-        foreach (['src', 'data-src'] as $attr) {
-            $v = $img->getAttribute($attr);
-            if ($v !== '' && !preg_match('#^(https?:)?//|^data:#i', $v)) {
-                $img->setAttribute($attr, 'https://docs.google.com/' . ltrim($v, '/'));
-            } elseif (str_starts_with($v, '//')) {
-                $img->setAttribute($attr, 'https:' . $v);
-            }
-        }
-        $img->setAttribute('referrerpolicy', 'no-referrer');
+        $v = $img->getAttribute('src');
+        if ($v === '' || str_starts_with($v, 'data:')) continue;
+        if (str_starts_with($v, '//'))               $v = 'https:' . $v;
+        elseif (!preg_match('#^https?://#i', $v))    $v = rtrim(preg_replace('#/[^/]*$#', '/', $GLOBALS['source']), '/') . '/' . ltrim($v, '/');
+        $img->setAttribute('src', '/agenda.php?img=' . rawurlencode($v));
+        $img->removeAttribute('srcset');
     }
 
     // 5. Page title, no indexing, and a little breathing room.
