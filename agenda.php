@@ -23,6 +23,10 @@ $COURSES = [
 $HIDDEN_DOMAINS = ['padlet.com', 'padlet.org', 'padlet.site', 'albert.io', 'codehs.com', 'codehs.org', 'codehs.me'];
 $CACHE_SECONDS  = 120;
 
+// Join codes that appear on their own (no "join code" label). Any code in the
+// Albert style ABC-123 (3 + 3 letters/digits, with a digit) is also hidden.
+$HIDDEN_CODES = ['V92-XBQ', '3T2-2W5'];
+
 header('X-Robots-Tag: noindex, nofollow');
 
 /* ---------- image pass-through: /agenda.php?img=<google image address> ---------- */
@@ -48,7 +52,7 @@ if (!isset($COURSES[$key])) {
 [$title, $source] = $COURSES[$key];
 
 /* ---------- fetch (with a short cache) ---------- */
-$cacheFile = sys_get_temp_dir() . '/mrfarouq_agenda_v4_' . $key . '.html';
+$cacheFile = sys_get_temp_dir() . '/mrfarouq_agenda_v5_' . $key . '.html';
 $html = null;
 if (is_file($cacheFile) && time() - filemtime($cacheFile) < $CACHE_SECONDS) {
     $html = file_get_contents($cacheFile);
@@ -56,7 +60,7 @@ if (is_file($cacheFile) && time() - filemtime($cacheFile) < $CACHE_SECONDS) {
 if (!$html) {
     $html = fetch_url($source);
     if ($html) {
-        $html = clean_html($html, $HIDDEN_DOMAINS, $title);
+        $html = clean_html($html, $HIDDEN_DOMAINS, $title, $HIDDEN_CODES);
         @file_put_contents($cacheFile, $html);
     } elseif (is_file($cacheFile)) {
         $html = file_get_contents($cacheFile);      // serve the last good copy
@@ -125,7 +129,7 @@ function is_hidden(string $text, array $domains): bool {
     return false;
 }
 
-function clean_html(string $html, array $domains, string $title): string {
+function clean_html(string $html, array $domains, string $title, array $codes = []): string {
     libxml_use_internal_errors(true);
     $doc = new DOMDocument();
     $doc->loadHTML('<?xml encoding="UTF-8">' . $html, LIBXML_NOERROR | LIBXML_NOWARNING);
@@ -171,6 +175,15 @@ function clean_html(string $html, array $domains, string $title): string {
                 return '[code hidden]';
             }, $t->nodeValue);
         }
+    }
+
+    // 3a. Standalone codes: the listed codes, and anything shaped like ABC-123.
+    $albertRx = '/\b(?=[A-Z0-9]{3}-[A-Z0-9]{3}\b)(?=[A-Z-]*\d)[A-Z0-9]{3}-[A-Z0-9]{3}\b/';
+    foreach (iterator_to_array($xp->query('//body//text()')) as $t) {
+        $v = $t->nodeValue;
+        foreach ($codes as $c) $v = str_ireplace($c, '[code hidden]', $v);
+        $v = preg_replace($albertRx, '[code hidden]', $v);
+        if ($v !== $t->nodeValue) $t->nodeValue = $v;
     }
 
     // 3b. Remove Google's own header/footer links that point back to the doc.
