@@ -27,7 +27,7 @@ const POSTS = [
     prompt: "claude, remember the higsfield video you made for me about the guy on the train? now i want you to make a video for my ap computer science teacher, his name is mr farouq, he is an amazing teacher and says a lot of jokes, hes also not that good at basketball but i want you to say hes really good and then make the same type of 3d video maybe with the huzz behind him while hes playing basketball, voiceover too, in english, 30 seconds, dad jokes.",
     video: "blog_2026-11-18_hn_opus.mp4",
     poster: "blog_2026-11-18_hn_opus_poster.jpg",
-    tags: ["Video Generation", "Higgsfield AI", "Speko"]
+    tags: ["Video Generation", "Higgsfield AI", "Speko", "Claude"]
   },
   {
     title: "Post-Impressionist Desert Horizon",
@@ -136,6 +136,6 @@ const POSTS = [
     credit: "Mr. F",
     text: "For the upcoming U11 Boys Basketball season, I made a tryout flyer using the image generation and editing tools we have been learning about. Made with DALL-E 3 and Canva.",
     image: "U11_Tryouts.png",
-    tags: ["Image Generation", "DALL-E", "Canva"]
+    tags: ["Image Generation", "ChatGPT", "DALL-E", "Canva"]
   }
 ];
