@@ -8,6 +8,8 @@
 //  credit – who made it, e.g. "Made by H.M." or "Mr. F"
 //  text   – a sentence or two (optional)
 //  image  – file name inside the images2 folder (optional)
+//  video  – mp4 file name inside the videos folder (optional, used instead of image)
+//  poster – still image shown before the video plays (images2 folder)
 //  model  – AI model used, e.g. "Firefly" (shown as a tag at the bottom)
 //  promptParts – optional labelled lines, e.g. Subject / Setting / Style
 //  prompt – the exact prompt the student used
@@ -17,6 +19,16 @@
 // ============================================================
 
 const POSTS = [
+  {
+    title: "Mr. Farouq: #1 Hooper",
+    date: "2026-11-18",
+    credit: "Made by H.N.",
+    model: "Opus 5.5",
+    prompt: "claude, remember the higsfield video you made for me about the guy on the train? now i want you to make a video for my ap computer science teacher, his name is mr farouq, he is an amazing teacher and says a lot of jokes, hes also not that good at basketball but i want you to say hes really good and then make the same type of 3d video maybe with the huzz behind him while hes playing basketball, voiceover too, in english, 30 seconds, dad jokes.",
+    video: "blog_2026-11-18_hn_opus.mp4",
+    poster: "blog_2026-11-18_hn_opus_poster.jpg",
+    tags: ["Video Generation"]
+  },
   {
     title: "Post-Impressionist Desert Horizon",
     date: "2026-09-25",

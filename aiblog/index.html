@@ -104,7 +104,7 @@
       margin-bottom: 0.9rem;
     }
     .post-card p.text { color: #222; }
-    .post-card img.post-img {
+    .post-card .post-img {
       width: 100%;
       border-radius: 8px;
       border: 1px solid #d5dbe8;
@@ -260,7 +260,11 @@
     }
 
     function renderPost(p) {
-      const image = p.image
+      const image = p.video
+        ? `<video class="post-img" controls playsinline preload="metadata"${p.poster ? ` poster="../images2/${encodeURI(p.poster)}"` : ""}>
+             <source src="../videos/${encodeURI(p.video)}" type="video/mp4">
+           </video>`
+        : p.image
         ? `<img class="post-img" src="../images2/${encodeURI(p.image)}" alt="${escapeHtml(p.title)}" loading="lazy">`
         : "";
       const links = (p.links || []).length
