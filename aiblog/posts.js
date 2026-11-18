@@ -27,7 +27,7 @@ const POSTS = [
     prompt: "claude, remember the higsfield video you made for me about the guy on the train? now i want you to make a video for my ap computer science teacher, his name is mr farouq, he is an amazing teacher and says a lot of jokes, hes also not that good at basketball but i want you to say hes really good and then make the same type of 3d video maybe with the huzz behind him while hes playing basketball, voiceover too, in english, 30 seconds, dad jokes.",
     video: "blog_2026-11-18_hn_opus.mp4",
     poster: "blog_2026-11-18_hn_opus_poster.jpg",
-    tags: ["Video Generation"]
+    tags: ["Video Generation", "Higgsfield AI", "Speko"]
   },
   {
     title: "Post-Impressionist Desert Horizon",
