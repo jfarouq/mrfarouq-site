@@ -10,7 +10,8 @@
  *
  * The doc is fetched fresh (cached for 2 minutes), so edits in Google Docs
  * still appear automatically. To hide another site's links as well, add its
- * domain to $HIDDEN_DOMAINS.
+ * domain to $HIDDEN_DOMAINS. Class join codes (e.g. "Join code: AB12C") are
+ * replaced with "[code hidden]".
  */
 
 $COURSES = [
@@ -19,7 +20,7 @@ $COURSES = [
     'introai' => ['Intro to AI Daily Agenda', 'https://docs.google.com/document/d/e/2PACX-1vRtvx1XbbG4OSriAozE_DGtxpAC2-1LcNcklZ5I4Ju7KPuwZ0q4iYjO77XaWeRWxJZuRurNGBizTP2-/pub'],
 ];
 
-$HIDDEN_DOMAINS = ['padlet.com', 'padlet.org', 'padlet.site'];
+$HIDDEN_DOMAINS = ['padlet.com', 'padlet.org', 'padlet.site', 'albert.io', 'codehs.com', 'codehs.org', 'codehs.me'];
 $CACHE_SECONDS  = 120;
 
 header('X-Robots-Tag: noindex, nofollow');
@@ -47,7 +48,7 @@ if (!isset($COURSES[$key])) {
 [$title, $source] = $COURSES[$key];
 
 /* ---------- fetch (with a short cache) ---------- */
-$cacheFile = sys_get_temp_dir() . '/mrfarouq_agenda_v3_' . $key . '.html';
+$cacheFile = sys_get_temp_dir() . '/mrfarouq_agenda_v4_' . $key . '.html';
 $html = null;
 if (is_file($cacheFile) && time() - filemtime($cacheFile) < $CACHE_SECONDS) {
     $html = file_get_contents($cacheFile);
@@ -131,7 +132,9 @@ function clean_html(string $html, array $domains, string $title): string {
     $xp = new DOMXPath($doc);
 
     $domainPattern = implode('|', array_map(fn($d) => preg_quote($d, '/'), $domains));
-    $urlRegex = '/(https?:\/\/)?([a-z0-9-]+\.)*(' . $domainPattern . ')\S*/i';
+    // A web address for a hidden site: with http(s)://, or followed by a /path.
+    // A bare name like "Albert.io" in a sentence is left alone.
+    $urlRegex = '/https?:\/\/([a-z0-9-]+\.)*(' . $domainPattern . ')\S*|\b(www\.)?([a-z0-9-]+\.)*(' . $domainPattern . ')\/\S*/i';
 
     // 1. Links pointing at a hidden site: keep the label text, drop the link.
     //    If the label is itself the hidden web address, drop it entirely.
@@ -153,7 +156,24 @@ function clean_html(string $html, array $domains, string $title): string {
         }
     }
 
-    // 3. Remove Google's own header/footer links that point back to the doc.
+    // 3. Join codes: in any line that mentions a join/class/section code,
+    //    hide code-like tokens (letters+digits, or 5+ capital letters).
+    $trigger = '/\b(join|class|section|course|enrol\w*|enroll\w*|access|invite)\s*codes?\b|\bcodes?\s*[:=#]/i';
+    $common  = ['CODE','CODES','JOIN','CLASS','SECTION','ALBERT','CODEHS','AP','CSA','CSP','AI','HERE','LINK','USE','THE','WITH'];
+    $codeRx  = '/\b(?=[A-Za-z0-9-]*\d)(?=[A-Za-z0-9-]*[A-Za-z])[A-Za-z0-9]{2,}(?:-[A-Za-z0-9]{2,})*\b|\b[A-Z]{5,12}\b/';
+    foreach (iterator_to_array($xp->query('//body//*[self::p or self::li or self::td or self::h1 or self::h2 or self::h3 or self::h4 or self::h5 or self::h6]')) as $block) {
+        if (!preg_match($trigger, $block->textContent)) continue;
+        foreach (iterator_to_array($xp->query('.//text()', $block)) as $t) {
+            $t->nodeValue = preg_replace_callback($codeRx, function ($m) use ($common) {
+                $w = $m[0];
+                if (in_array(strtoupper($w), $common, true)) return $w;
+                if (preg_match('/^\d+(st|nd|rd|th)$/i', $w)) return $w;      // 1st, 2nd …
+                return '[code hidden]';
+            }, $t->nodeValue);
+        }
+    }
+
+    // 3b. Remove Google's own header/footer links that point back to the doc.
     foreach (['//div[@id="header"]', '//div[@id="footer"]', '//*[@id="banners"]'] as $q) {
         foreach (iterator_to_array($xp->query($q)) as $n) $n->parentNode->removeChild($n);
     }
