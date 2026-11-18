@@ -15,9 +15,9 @@
  */
 
 $COURSES = [
-    'apcsa'   => ['AP CSA Daily Agenda',      'https://docs.google.com/document/d/e/2PACX-1vSKqB0Y156N5EXJWhkpIQKE_Zskw98EJMyjYak2Z8zxQ96URzCGQcxw3cd6gWmhhavYsp-LtBfu11QB/pub'],
-    'apcsp'   => ['AP CSP Daily Agenda',      'https://docs.google.com/document/d/e/2PACX-1vQOWbm8hJ4ID1n0rxOaGvb5M5bLCXElSroPSb-qMsiyxFJOZ4peHq9D9ryHMzlsXags_Xd-_w_YRd0O/pub'],
-    'introai' => ['Intro to AI Daily Agenda', 'https://docs.google.com/document/d/e/2PACX-1vRtvx1XbbG4OSriAozE_DGtxpAC2-1LcNcklZ5I4Ju7KPuwZ0q4iYjO77XaWeRWxJZuRurNGBizTP2-/pub'],
+    'apcsa'   => ['AP CSA Daily Agenda',      'AP® Computer Science A', 'https://docs.google.com/document/d/e/2PACX-1vSKqB0Y156N5EXJWhkpIQKE_Zskw98EJMyjYak2Z8zxQ96URzCGQcxw3cd6gWmhhavYsp-LtBfu11QB/pub'],
+    'apcsp'   => ['AP CSP Daily Agenda',      'AP® Computer Science Principles', 'https://docs.google.com/document/d/e/2PACX-1vQOWbm8hJ4ID1n0rxOaGvb5M5bLCXElSroPSb-qMsiyxFJOZ4peHq9D9ryHMzlsXags_Xd-_w_YRd0O/pub'],
+    'introai' => ['Intro to AI Daily Agenda', 'Introduction to Artificial Intelligence', 'https://docs.google.com/document/d/e/2PACX-1vRtvx1XbbG4OSriAozE_DGtxpAC2-1LcNcklZ5I4Ju7KPuwZ0q4iYjO77XaWeRWxJZuRurNGBizTP2-/pub'],
 ];
 
 $HIDDEN_DOMAINS = ['padlet.com', 'padlet.org', 'padlet.site', 'albert.io', 'codehs.com', 'codehs.org', 'codehs.me'];
@@ -49,10 +49,10 @@ if (!isset($COURSES[$key])) {
     http_response_code(404);
     show_message('Agenda not found', 'That agenda does not exist.');
 }
-[$title, $source] = $COURSES[$key];
+[$title, $heading, $source] = $COURSES[$key];
 
 /* ---------- fetch (with a short cache) ---------- */
-$cacheFile = sys_get_temp_dir() . '/mrfarouq_agenda_v5_' . $key . '.html';
+$cacheFile = sys_get_temp_dir() . '/mrfarouq_agenda_v6_' . $key . '.html';
 $html = null;
 if (is_file($cacheFile) && time() - filemtime($cacheFile) < $CACHE_SECONDS) {
     $html = file_get_contents($cacheFile);
@@ -60,7 +60,7 @@ if (is_file($cacheFile) && time() - filemtime($cacheFile) < $CACHE_SECONDS) {
 if (!$html) {
     $html = fetch_url($source);
     if ($html) {
-        $html = clean_html($html, $HIDDEN_DOMAINS, $title, $HIDDEN_CODES);
+        $html = clean_html($html, $HIDDEN_DOMAINS, $title, $HIDDEN_CODES, $heading);
         @file_put_contents($cacheFile, $html);
     } elseif (is_file($cacheFile)) {
         $html = file_get_contents($cacheFile);      // serve the last good copy
@@ -129,7 +129,7 @@ function is_hidden(string $text, array $domains): bool {
     return false;
 }
 
-function clean_html(string $html, array $domains, string $title, array $codes = []): string {
+function clean_html(string $html, array $domains, string $title, array $codes = [], string $heading = ''): string {
     libxml_use_internal_errors(true);
     $doc = new DOMDocument();
     $doc->loadHTML('<?xml encoding="UTF-8">' . $html, LIBXML_NOERROR | LIBXML_NOWARNING);
@@ -217,10 +217,102 @@ function clean_html(string $html, array $domains, string $title, array $codes = 
         $head->appendChild($m);
     }
 
+    // 6. Site frame: green page, face logo top-left, white course heading, doc in a white panel.
+    $body = $xp->query('//body')->item(0);
+    if ($body && $head) {
+        $frame = $doc->createElement('div');
+        $frame->setAttribute('class', 'mf-frame');
+        while ($body->firstChild) $frame->appendChild($body->firstChild);
+
+        $top = $doc->createElement('div');
+        $top->setAttribute('class', 'mf-top');
+        $a = $doc->createElement('a');
+        $a->setAttribute('href', '/');
+        $a->setAttribute('class', 'mf-logo');
+        $img = $doc->createElement('img');
+        $img->setAttribute('src', '/images2/farouq_tab5.png?v=9');
+        $img->setAttribute('alt', 'Home');
+        $a->appendChild($img);
+        $h = $doc->createElement('h1');
+        $h->setAttribute('class', 'mf-title');
+        $h->appendChild($doc->createTextNode($heading ?: $title));
+        $top->appendChild($a);
+        $top->appendChild($h);
+
+        $body->appendChild($top);
+        $body->appendChild($frame);
+
+        $font = $doc->createElement('link');
+        $font->setAttribute('rel', 'stylesheet');
+        $font->setAttribute('href', 'https://fonts.googleapis.com/css?family=Coustard');
+        $head->appendChild($font);
+        foreach ([32, 48, 64, 96, 192] as $n) {
+            $l = $doc->createElement('link');
+            $l->setAttribute('rel', 'icon');
+            $l->setAttribute('type', 'image/png');
+            $l->setAttribute('sizes', "{$n}x{$n}");
+            $l->setAttribute('href', "/images2/agenda-fav-{$n}.png?v=1");
+            $head->appendChild($l);
+        }
+        $style = $doc->createElement('style');
+        $style->appendChild($doc->createTextNode(SITE_CSS));
+        $head->appendChild($style);
+    }
+
     $out = $doc->saveHTML();
     $out = str_replace('<?xml encoding="UTF-8">', '', $out);
     return preg_replace('/<head>/i', '<head><meta charset="utf-8">', $out, 1);
 }
+
+const SITE_CSS = <<<CSS
+html, body {
+  background: #4CAF50 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
+  width: auto !important;
+}
+.mf-top {
+  position: relative;
+  padding: 16px 16px 8px;
+  min-height: 104px;
+  box-sizing: border-box;
+}
+.mf-logo {
+  position: absolute;
+  left: 16px;
+  top: 8px;
+}
+.mf-logo img {
+  height: 88px;
+  width: auto;
+  display: block;
+}
+h1.mf-title {
+  font-family: "Coustard", sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 2.5rem !important;
+  line-height: 1.2 !important;
+  color: #fff !important;
+  text-align: center !important;
+  margin: 24px 120px 0 !important;
+  padding: 0 !important;
+}
+.mf-frame {
+  background: #fff;
+  max-width: 900px;
+  margin: 20px auto 48px;
+  padding: 48px 64px;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+@media (max-width: 700px) {
+  .mf-top { min-height: 0; padding-top: 80px; }
+  .mf-logo img { height: 64px; }
+  h1.mf-title { font-size: 1.6rem !important; margin: 0 8px !important; }
+  .mf-frame { margin: 16px 10px 32px; padding: 24px 18px; }
+}
+CSS;
 
 function show_message(string $title, string $msg): void {
     header('Content-Type: text/html; charset=utf-8');
