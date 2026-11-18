@@ -32,7 +32,7 @@ if (!isset($COURSES[$key])) {
 [$title, $source] = $COURSES[$key];
 
 /* ---------- fetch (with a short cache) ---------- */
-$cacheFile = sys_get_temp_dir() . '/mrfarouq_agenda_' . $key . '.html';
+$cacheFile = sys_get_temp_dir() . '/mrfarouq_agenda_v2_' . $key . '.html';
 $html = null;
 if (is_file($cacheFile) && time() - filemtime($cacheFile) < $CACHE_SECONDS) {
     $html = file_get_contents($cacheFile);
@@ -128,12 +128,29 @@ function clean_html(string $html, array $domains, string $title): string {
         foreach (iterator_to_array($xp->query($q)) as $n) $n->parentNode->removeChild($n);
     }
 
-    // 4. Page title, no indexing, and a little breathing room.
+    // 4. Images: make relative addresses absolute and load them straight from Google.
+    foreach (iterator_to_array($xp->query('//img')) as $img) {
+        foreach (['src', 'data-src'] as $attr) {
+            $v = $img->getAttribute($attr);
+            if ($v !== '' && !preg_match('#^(https?:)?//|^data:#i', $v)) {
+                $img->setAttribute($attr, 'https://docs.google.com/' . ltrim($v, '/'));
+            } elseif (str_starts_with($v, '//')) {
+                $img->setAttribute($attr, 'https:' . $v);
+            }
+        }
+        $img->setAttribute('referrerpolicy', 'no-referrer');
+    }
+
+    // 5. Page title, no indexing, and a little breathing room.
     $head = $xp->query('//head')->item(0);
     if ($head) {
         foreach (iterator_to_array($xp->query('//head/title')) as $n) $head->removeChild($n);
         $t = $doc->createElement('title', $title);
         $head->appendChild($t);
+        $r = $doc->createElement('meta');
+        $r->setAttribute('name', 'referrer');
+        $r->setAttribute('content', 'no-referrer');
+        $head->appendChild($r);
         $m = $doc->createElement('meta');
         $m->setAttribute('name', 'robots');
         $m->setAttribute('content', 'noindex, nofollow');
