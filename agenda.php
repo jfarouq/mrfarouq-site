@@ -52,7 +52,7 @@ if (!isset($COURSES[$key])) {
 [$title, $heading, $source] = $COURSES[$key];
 
 /* ---------- fetch (with a short cache) ---------- */
-$cacheFile = sys_get_temp_dir() . '/mrfarouq_agenda_v6_' . $key . '.html';
+$cacheFile = sys_get_temp_dir() . '/mrfarouq_agenda_v7_' . $key . '.html';
 $html = null;
 if (is_file($cacheFile) && time() - filemtime($cacheFile) < $CACHE_SECONDS) {
     $html = file_get_contents($cacheFile);
@@ -255,7 +255,7 @@ function clean_html(string $html, array $domains, string $title, array $codes = 
             $head->appendChild($l);
         }
         $style = $doc->createElement('style');
-        $style->appendChild($doc->createTextNode(SITE_CSS));
+        $style->appendChild($doc->createTextNode(site_css()));
         $head->appendChild($style);
     }
 
@@ -264,7 +264,8 @@ function clean_html(string $html, array $domains, string $title, array $codes = 
     return preg_replace('/<head>/i', '<head><meta charset="utf-8">', $out, 1);
 }
 
-const SITE_CSS = <<<CSS
+function site_css(): string {
+    return <<<CSS
 html, body {
   background: #4CAF50 !important;
   margin: 0 !important;
@@ -301,18 +302,20 @@ h1.mf-title {
 .mf-frame {
   background: #fff;
   max-width: 900px;
-  margin: 20px auto 48px;
+  margin: 20px auto 0;
   padding: 48px 64px;
-  border-radius: 12px;
+  border-radius: 12px 12px 0 0;
   box-sizing: border-box;
+  min-height: calc(100vh - 124px);
 }
 @media (max-width: 700px) {
   .mf-top { min-height: 0; padding-top: 80px; }
   .mf-logo img { height: 64px; }
   h1.mf-title { font-size: 1.6rem !important; margin: 0 8px !important; }
-  .mf-frame { margin: 16px 10px 32px; padding: 24px 18px; }
+  .mf-frame { margin: 16px 10px 0; padding: 24px 18px; }
 }
 CSS;
+}
 
 function show_message(string $title, string $msg): void {
     header('Content-Type: text/html; charset=utf-8');
