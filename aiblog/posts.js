@@ -20,6 +20,15 @@
 
 const POSTS = [
   {
+    title: "Ghosts in the Dark Classroom",
+    date: "2026-10-30",
+    credit: "Made by H.C.",
+    model: "Nano Banana 2",
+    prompt: "a painting of a school, with white tables and there are ghosts all over inside the classroom, walking around while they are standing as the room is dark because the lights are turned off and at the back there is just windows, in 3d render animation style with macro style",
+    image: "blog_2026-10-30_hc_nanobanana2_ghosts.jpg",
+    tags: ["Gemini"]
+  },
+  {
     title: "Halloween Dragon on the Soccer Field",
     date: "2026-10-30",
     credit: "Made by S.L.",
