@@ -20,6 +20,15 @@
 
 const POSTS = [
   {
+    title: "Little Blue Dragon at the Haunted House",
+    date: "2026-10-30",
+    credit: "Made by T.P.",
+    model: "Nano Banana 2",
+    prompt: "Create a painting of a small blue dragon at an indoor haunted house hosted by an international school in Vietnam, with dark environment but red soft light around the haunted house with ghost decorations, showing the front view of the haunted house with the dragon in the middle trying to scare students, make it studio ghibli art style",
+    image: "blog_2026-10-30_tp_nanobanana2_hauntedhouse.jpg",
+    tags: ["Gemini"]
+  },
+  {
     title: "Witch-Hat Dog by the Fireplace",
     date: "2026-10-30",
     credit: "Made by A.T.",
