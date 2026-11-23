@@ -20,6 +20,15 @@
 
 const POSTS = [
   {
+    title: "Witch-Hat Dog by the Fireplace",
+    date: "2026-10-30",
+    credit: "Made by A.T.",
+    model: "Nano Banana 2",
+    prompt: "Generate a painting of a dog wearing a witch hat with soft lighting and a dark and cozy indoor setting. it should be a front view with a realistic style background",
+    image: "blog_2026-10-30_at_nanobanana2_witchdog.jpg",
+    tags: ["Gemini"]
+  },
+  {
     title: "Creatures Lurking in the School Hallway",
     date: "2026-10-30",
     credit: "Made by S.C.",
