@@ -20,6 +20,16 @@
 
 const POSTS = [
   {
+    title: "Sea Otter Surfing a River of Bubble Tea",
+    date: "2026-09-15",
+    credit: "Made by S.L.",
+    model: "Firefly Image 4",
+    prompt: "A baby sea otter wearing colorful swimming goggles, surfing on a giant cookie through a sparkling river of bubble tea on an island made of candy and desserts, in the style of a 1990s Saturday morning cartoon",
+    quote: "Adobe Firefly is commercially safe because its models are trained mainly on licensed Adobe Stock content and public domain works whose copyrights have expired. This reduces the risk of copyright infringement, making Firefly generated content safer to use in commercial projects.",
+    image: "blog_2026-09-15_sl_firefly.jpg",
+    tags: ["Image Generation", "Adobe Firefly"]
+  },
+  {
     title: "Mr. Farouq: #1 Hooper",
     date: "2026-11-18",
     credit: "Made by H.N.",
