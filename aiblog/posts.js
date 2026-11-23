@@ -20,6 +20,15 @@
 
 const POSTS = [
   {
+    title: "Vampire Dragon Mascot",
+    date: "2026-10-30",
+    credit: "Made by C.H.",
+    model: "Nano Banana 2",
+    prompt: "Create a colorful, cartoon-style illustration of the SSIS blue dragon mascot dressed as a vampire for Halloween, standing in front of the SSIS school building at night, surrounded by glowing jack-o-lanterns, floating ghosts, bats, and cobwebs, with spooky purple and orange lighting, a vibrant Halloween color scheme, a front-facing perspective, and a fun, slightly spooky 3D animated style.",
+    image: "blog_2026-10-30_ch_nanobanana2_vampiredragon.jpg",
+    tags: ["Image Generation", "Gemini"]
+  },
+  {
     title: "Dragon vs. the Potato Witches",
     date: "2026-10-30",
     credit: "Made by I.A.",
