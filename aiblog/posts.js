@@ -20,6 +20,15 @@
 
 const POSTS = [
   {
+    title: "Dragon vs. the Potato Witches",
+    date: "2026-10-30",
+    credit: "Made by I.A.",
+    model: "Nano Banana 2",
+    prompt: "A whimsical, action-packed 3D animated scene on a high school campus under gloomy, overcast storm clouds. A swarm of funny, evil mutant potato witches with gnarled faces and tiny black witch hats fly frantically on wooden broomsticks. In the foreground, a cute, friendly blue dragon mascot wearing a school crest collar proudly defends the campus, breathing a bright stream of blue and gold fire. Mid-air, the fire hits the potato witches, transforming them into steaming baked potatoes topped with melting butter and chives. Playful expressions, dynamic cinematic composition, humorous tone, high detail.",
+    image: "blog_2026-10-30_ia_nanobanana2_potatowitches.jpg",
+    tags: ["Gemini"]
+  },
+  {
     title: "Dragon Mascot Hands Out Halloween Candy",
     date: "2026-10-30",
     credit: "Made by A.V.",
