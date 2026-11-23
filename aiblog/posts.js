@@ -20,6 +20,15 @@
 
 const POSTS = [
   {
+    title: "Dragon Mascot Hands Out Halloween Candy",
+    date: "2026-10-30",
+    credit: "Made by A.V.",
+    model: "Nano Banana 2",
+    prompt: "Create me an image for Halloween that has a blue SSIS mascot dragon giving out candies to kids at night at a neighbourhood and the house is decorated with props.",
+    image: "blog_2026-10-30_av_nanobanana2_candy.jpg",
+    tags: ["Gemini"]
+  },
+  {
     title: "Little Blue Dragon at the Haunted House",
     date: "2026-10-30",
     credit: "Made by T.P.",
