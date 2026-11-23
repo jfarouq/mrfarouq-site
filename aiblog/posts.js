@@ -20,6 +20,15 @@
 
 const POSTS = [
   {
+    title: "Halloween Dragon on the Soccer Field",
+    date: "2026-10-30",
+    credit: "Made by S.L.",
+    model: "Nano Banana 2",
+    prompt: "Create a digital painting of a cute dragon wearing a witch’s hat and an SSIS hoodie on the school’s soccer field at night, surrounded by glowing jack-o’-lanterns and floating ghosts, with soft moonlight, orange and purple colors, white school buildings in the background, and a front-facing, wide-angle composition in a playful 3D animated movie style.",
+    image: "blog_2026-10-30_sl_nanobanana2_dragon.jpg",
+    tags: ["Gemini"]
+  },
+  {
     title: "Sea Otter Surfing a River of Bubble Tea",
     date: "2026-09-15",
     credit: "Made by S.L.",
