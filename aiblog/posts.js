@@ -26,7 +26,7 @@ const POSTS = [
     model: "Nano Banana 2",
     prompt: "A whimsical, action-packed 3D animated scene on a high school campus under gloomy, overcast storm clouds. A swarm of funny, evil mutant potato witches with gnarled faces and tiny black witch hats fly frantically on wooden broomsticks. In the foreground, a cute, friendly blue dragon mascot wearing a school crest collar proudly defends the campus, breathing a bright stream of blue and gold fire. Mid-air, the fire hits the potato witches, transforming them into steaming baked potatoes topped with melting butter and chives. Playful expressions, dynamic cinematic composition, humorous tone, high detail.",
     image: "blog_2026-10-30_ia_nanobanana2_potatowitches.jpg",
-    tags: ["Gemini"]
+    tags: ["Image Generation", "Gemini"]
   },
   {
     title: "Dragon Mascot Hands Out Halloween Candy",
@@ -35,7 +35,7 @@ const POSTS = [
     model: "Nano Banana 2",
     prompt: "Create me an image for Halloween that has a blue SSIS mascot dragon giving out candies to kids at night at a neighbourhood and the house is decorated with props.",
     image: "blog_2026-10-30_av_nanobanana2_candy.jpg",
-    tags: ["Gemini"]
+    tags: ["Image Generation", "Gemini"]
   },
   {
     title: "Little Blue Dragon at the Haunted House",
@@ -44,7 +44,7 @@ const POSTS = [
     model: "Nano Banana 2",
     prompt: "Create a painting of a small blue dragon at an indoor haunted house hosted by an international school in Vietnam, with dark environment but red soft light around the haunted house with ghost decorations, showing the front view of the haunted house with the dragon in the middle trying to scare students, make it studio ghibli art style",
     image: "blog_2026-10-30_tp_nanobanana2_hauntedhouse.jpg",
-    tags: ["Gemini"]
+    tags: ["Image Generation", "Gemini"]
   },
   {
     title: "Witch-Hat Dog by the Fireplace",
@@ -53,7 +53,7 @@ const POSTS = [
     model: "Nano Banana 2",
     prompt: "Generate a painting of a dog wearing a witch hat with soft lighting and a dark and cozy indoor setting. it should be a front view with a realistic style background",
     image: "blog_2026-10-30_at_nanobanana2_witchdog.jpg",
-    tags: ["Gemini"]
+    tags: ["Image Generation", "Gemini"]
   },
   {
     title: "Creatures Lurking in the School Hallway",
@@ -62,7 +62,7 @@ const POSTS = [
     model: "Nano Banana 2",
     prompt: "A cinematic Halloween photo of several creepy Gollum creatures with pale skin, large glowing eyes, and ragged clothes lurking in the hallways, students are watching the gollums, and classrooms of SSIS international school in Ho Chi Minh City, with spooky purple and orange neon lighting, eerie fog, jack-o-lanterns, dark shadows, realistic school architecture, a dramatic low-angle perspective, and highly detailed horror-movie photography style.",
     image: "blog_2026-10-30_sc_nanobanana2_creatures.jpg",
-    tags: ["Gemini"]
+    tags: ["Image Generation", "Gemini"]
   },
   {
     title: "Ghosts in the Dark Classroom",
@@ -71,7 +71,7 @@ const POSTS = [
     model: "Nano Banana 2",
     prompt: "a painting of a school, with white tables and there are ghosts all over inside the classroom, walking around while they are standing as the room is dark because the lights are turned off and at the back there is just windows, in 3d render animation style with macro style",
     image: "blog_2026-10-30_hc_nanobanana2_ghosts.jpg",
-    tags: ["Gemini"]
+    tags: ["Image Generation", "Gemini"]
   },
   {
     title: "Halloween Dragon on the Soccer Field",
@@ -80,7 +80,7 @@ const POSTS = [
     model: "Nano Banana 2",
     prompt: "Create a digital painting of a cute dragon wearing a witch’s hat and an SSIS hoodie on the school’s soccer field at night, surrounded by glowing jack-o’-lanterns and floating ghosts, with soft moonlight, orange and purple colors, white school buildings in the background, and a front-facing, wide-angle composition in a playful 3D animated movie style.",
     image: "blog_2026-10-30_sl_nanobanana2_dragon.jpg",
-    tags: ["Gemini"]
+    tags: ["Image Generation", "Gemini"]
   },
   {
     title: "Sea Otter Surfing a River of Bubble Tea",
