@@ -20,6 +20,15 @@
 
 const POSTS = [
   {
+    title: "Creatures Lurking in the School Hallway",
+    date: "2026-10-30",
+    credit: "Made by S.C.",
+    model: "Nano Banana 2",
+    prompt: "A cinematic Halloween photo of several creepy Gollum creatures with pale skin, large glowing eyes, and ragged clothes lurking in the hallways, students are watching the gollums, and classrooms of SSIS international school in Ho Chi Minh City, with spooky purple and orange neon lighting, eerie fog, jack-o-lanterns, dark shadows, realistic school architecture, a dramatic low-angle perspective, and highly detailed horror-movie photography style.",
+    image: "blog_2026-10-30_sc_nanobanana2_creatures.jpg",
+    tags: ["Gemini"]
+  },
+  {
     title: "Ghosts in the Dark Classroom",
     date: "2026-10-30",
     credit: "Made by H.C.",
