@@ -24,7 +24,7 @@ const POSTS = [
     date: "2026-11-26",
     credit: "Made by T.L.",
     model: "Nano Banana 2",
-    prompt: "Make an image of a upside down skyscraper reflecting onto the window of another skyscraper and reflect it 5 more times. Invert the image and put 5 red circles around it. Draw an image of a boy doing a backflip and make his head made of abstract shapes. The boy doing the backflip is inverted, reflected, upside down, and black and white.Make an image of a upside down skyscraper reflecting onto the window of another skyscraper and reflect it 5 more times. Invert the image and put 5 red circles around it. Draw an image of a boy doing a backflip and make his head made of abstract shapes. The boy doing the backflip is inverted, reflected, upside down, and black and white. Add 4 blue circles and 30 kangaroos made out of water and mud and glass and make it jump on the boy while the kangaroo has his limbs spread out and eating eating jumping smiling",
+    prompt: "Make an image of a upside down skyscraper reflecting onto the window of another skyscraper and reflect it 5 more times. Invert the image and put 5 red circles around it. Draw an image of a boy doing a backflip and make his head made of abstract shapes. The boy doing the backflip is inverted, reflected, upside down, and black and white. Add 4 blue circles and 30 kangaroos made out of water and mud and glass and make it jump on the boy while the kangaroo has his limbs spread out and eating, jumping, smiling",
     image: "blog_2026-11-26_tl_nanobanana2_impossible.jpg",
     tags: ["Image Generation", "Gemini"]
   },
